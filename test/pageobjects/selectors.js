@@ -22,6 +22,10 @@ class Selectors {
         return $('button[data-testid="user-widget-link"]') 
     }
 
+    get loginFailAlert () {
+        return $('svg[aria-label="Error:"]')
+    }
+
     get searchBtn () {
         return $('a[aria-label="Search"]')
     }
@@ -109,6 +113,26 @@ class Selectors {
 
     get deletePlaylistBtn () {
         return $('//span[@class="ButtonInner-sc-14ud5tc-0 glYGDr encore-bright-accent-set MIsUJlamzLYuAlvPbmZz"][contains(text(), "Delete")]')
+    }
+
+    get profileIcon () {
+        return $('svg[data-testid="user-icon"]')
+    }
+
+    get profileBtn () {
+        return $('//a[@role="menuitem"]/span[contains(text(), "Profile")]')
+    }
+
+    get profileNameField () {
+        return $('span[data-testid="entityTitle"]')
+    }
+
+    get editUserNameField () {
+        return $('input[data-testid="user-edit-name-input"]')
+    }
+
+    get saveNewUsername () {
+        return $('//button[@data-encore-id="buttonPrimary"]/span[contains(text(), "Save")]')
     }
 
 

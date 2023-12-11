@@ -1,7 +1,7 @@
 const Page = require('./page')
 const Selectors = require('./selectors.js')
 
-class Flow extends Page {
+class Flow extends Page  {
     async signIn() {
         await super.openSpotifyMainPage();
         await Selectors.loginBtn.click();
@@ -11,7 +11,26 @@ class Flow extends Page {
 
     async runFlowOne() {
         await this.signIn()
-        await Selectors.signOut()
+        await Selectors.signOut();
+    }
+
+    async runFlowOneNegative () {
+        await super.openSpotifyMainPage();
+        await Selectors.logInBtn.click();
+        await Selectors.emailField.setValue('sarah.widmer1544@stu.mtec.edu');
+        await Selectors.passwordField.setValue('Yeho3jjaaa');
+        await Selectors.logInBtn.click();
+        await expect(Selectors.loginFailAlert).toBeExisting();
+
+    }
+
+    async runFlowOneWrongEamil () {
+        await super.openSpotifyMainPage();
+        await Selectors.logInBtn.click();
+        await Selectors.emailField.setValue('adsjfwekvl');
+        await Selectors.passwordField.setValue('5Janleksa');
+        await Selectors.logInBtn.click();
+        await expect(Selectors.loginFailAlert).toBeExisting();
     }
     
     async runFlowTwo() {
@@ -23,7 +42,8 @@ class Flow extends Page {
         await expect(Selectors.likedSongsBtn).toBeExisting();
         await Selectors.threeDotsWithWithoutYou.click();
         await Selectors.removeFromYourLikedSongsBtn.click();
-        // await expect(Selectors.likedSongsBtn). check to make sure the liked song was removed
+        await Selectors.homeIcon.click();
+        await Selectors.signOut();
     }
     
     async runFlowThree() {
@@ -43,19 +63,25 @@ class Flow extends Page {
         await browser.pause(4000);
         await Selectors.Vertigo.click();
         await browser.pause(6000);
-       // await Selectors.threeDotsInPlaylist.click();
         await Selectors.playlist.click({button: 'right'});
         await browser.pause(4000);
         await Selectors.deletePlaylistFromList.click();
         await browser.pause(4000);
         await Selectors.deletePlaylistBtn.click();
         await browser.pause(4000);
-
-
-
-
+        await Selectors.signOut();
     }
 
+    async runFlowFour() {
+        await this.signIn();
+        await Selectors.homeIcon.click();
+        await Selectors.profileIcon.click();
+        await Selectors.profileBtn.click();
+        await Selectors.profileNameField.click();
+        await Selectors.editUserNameField.setValue('sarah');
+        await Selectors.saveNewUsername.click();
+
+    }
 }
 
 module.exports = new Flow();
