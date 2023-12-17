@@ -1,11 +1,15 @@
+// This page holds logic for my tests
+
 const Page = require('./page')
 const Selectors = require('./selectors.js')
+const Passwords = require('./passwords.js')
 
 class Flow extends Page  {
+
     async signIn() {
         await super.openSpotifyMainPage();
         await Selectors.loginBtn.click();
-        await Selectors.login('sarah.widmer1544@stu.mtec.edu', '5Janleksa');
+        await Selectors.login(Passwords.email, Passwords.password);
         await expect(Selectors.successfulLogin).toBeExisting();
     }
 
@@ -17,7 +21,7 @@ class Flow extends Page  {
     async runFlowOneNegative () {
         await super.openSpotifyMainPage();
         await Selectors.logInBtn.click();
-        await Selectors.emailField.setValue('sarah.widmer1544@stu.mtec.edu');
+        await Selectors.emailField.setValue(Passwords.email);
         await Selectors.passwordField.setValue('Yeho3jjaaa');
         await Selectors.logInBtn.click();
         await expect(Selectors.loginFailAlert).toBeExisting();
@@ -43,7 +47,6 @@ class Flow extends Page  {
         await Selectors.threeDotsWithWithoutYou.click();
         await Selectors.removeFromYourLikedSongsBtn.click();
         await Selectors.homeIcon.click();
-        await Selectors.signOut();
     }
     
     async runFlowThree() {
@@ -55,20 +58,14 @@ class Flow extends Page  {
         await Selectors.newPlaylistNameField.setValue('sarah');
         await Selectors.savePlaylistName.click();
         await Selectors.searchSongsInPlaylist.setValue('u2');
-        await browser.pause(6000);  
+        //await browser.pause(6000);  
         // don't delete this line. Need the pause for results to show up
         await Selectors.u2Result.click();
-        await browser.pause(4000);
         await Selectors.stillHaventFound.click();
-        await browser.pause(4000);
         await Selectors.Vertigo.click();
-        await browser.pause(6000);
         await Selectors.playlist.click({button: 'right'});
-        await browser.pause(4000);
         await Selectors.deletePlaylistFromList.click();
-        await browser.pause(4000);
         await Selectors.deletePlaylistBtn.click();
-        await browser.pause(4000);
         await Selectors.signOut();
     }
 

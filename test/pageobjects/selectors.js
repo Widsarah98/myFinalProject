@@ -1,4 +1,7 @@
+//This page contains the Selectors and login/logout functions 
+
 const { $ } = require('@wdio/globals')
+const Passwords = require('./passwords.js')
 
 class Selectors {
 
@@ -139,8 +142,8 @@ class Selectors {
     //on the above I will use it in my test to make sure this selector exists. 
 
     async login (username, password) {
-        await this.emailField.setValue(username);
-        await this.passwordField.setValue(password);
+        await this.emailField.setValue(Passwords.email);
+        await this.passwordField.setValue(Passwords.password);
         await this.logInBtn.click();
     }
 
